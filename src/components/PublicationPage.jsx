@@ -4,7 +4,6 @@ import { companies } from "@datapack/experience";
 import { schools } from "@datapack/education";
 import { projects } from "@datapack/projects";
 import { publications } from "@datapack/publications";
-import { formatSingle } from "../utils/dateFormat";
 import Icon from "./Icon";
 import { groupDescriptionItems, renderGroups, renderInlineMarkdown } from "../utils/descriptionRenderer.jsx";
 import { getEntryType } from "../utils/publicationTypes";
@@ -36,7 +35,9 @@ export default function PublicationPage({ publicationId, onBack, onProjectLink }
 
   if (!pub) return null;
 
-  const dateLabel = pub.date ? formatSingle(pub.date) : null;
+  const publicationLocation = pub.location || pub.address;
+  const publicationYear = pub.date ? String(pub.date).split(/[-/]/)[0] : null;
+  const publicationMeta = [publicationLocation, publicationYear].filter(Boolean).join(", ") || null;
   const booktitleLabel = pub.booktitle
     ? [pub.series, pub.booktitle].filter(Boolean).join(": ")
     : null;
@@ -128,10 +129,10 @@ export default function PublicationPage({ publicationId, onBack, onProjectLink }
 
           {/* Page body (scrollable) */}
           <div className="px-6 py-8 space-y-8 overflow-y-auto" style={{ flex: 1 }}>
-            {/* Date + origins */}
+            {/* Location/year + origins */}
             <div className="space-y-3">
-              {dateLabel && (
-                <p className="text-sm text-gray-400">{dateLabel}</p>
+              {publicationMeta && (
+                <p className="text-sm text-gray-400">{publicationMeta}</p>
               )}
 
               {(origins.length > 0 || pubType) && (

@@ -256,6 +256,11 @@ export default function Skills({ onShowProjects, isActive, isPrevious = false, a
             selectedProfessional.length > 0 ||
             selectedAcademic.length > 0 ||
             personalSelected;
+        const hasOtherFilters =
+            selectedProfessional.length > 0 ||
+            selectedAcademic.length > 0 ||
+            personalSelected;
+        const featuredSkillCount = skills.filter((skill) => skill.tags.includes("featured")).length;
 
         return (
             <section id="skills" className="py-16">
@@ -365,19 +370,38 @@ export default function Skills({ onShowProjects, isActive, isPrevious = false, a
                     })}
                 </div>
 
-                {hasAnyFilter && (
-                    <div className="mt-8 flex justify-center">
-                        <button
-                            type="button"
-                            onClick={() => {
-                                clearAll();
-                                const section = document.getElementById("skills");
-                                section?.scrollIntoView({ behavior: "smooth" });
-                            }}
-                            className={`w-fit rounded border px-3 py-2 text-sm font-normal transition section-accent-button`}
-                        >
-                            {`Show all skills (${skills.length})`}
-                        </button>
+                {(!featuredSelected || hasAnyFilter) && (
+                    <div className="mt-8 flex flex-wrap justify-center gap-3">
+                        {!featuredSelected && (
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setSelectedProfessional([]);
+                                    setSelectedAcademic([]);
+                                    setPersonalSelected(false);
+                                    setFeaturedSelected(true);
+                                    setSelectedSkillId(null);
+                                    const section = document.getElementById("skills");
+                                    section?.scrollIntoView({ behavior: "smooth" });
+                                }}
+                                className="w-fit rounded border px-3 py-2 text-sm font-normal transition section-accent-button"
+                            >
+                                {`Show featured skills${hasOtherFilters ? "" : " only"} (${featuredSkillCount})`}
+                            </button>
+                        )}
+                        {(hasOtherFilters || featuredSelected) && (
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    clearAll();
+                                    const section = document.getElementById("skills");
+                                    section?.scrollIntoView({ behavior: "smooth" });
+                                }}
+                                className="w-fit rounded border px-3 py-2 text-sm font-normal transition section-accent-button"
+                            >
+                                {`Show all skills (${skills.length})`}
+                            </button>
+                        )}
                     </div>
                 )}
             </section>
