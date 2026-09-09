@@ -11,7 +11,7 @@ export const publications = [
         tags: ["hfpt323", "conf"],
         authors: [
             "João Oliveira",
-            "Alexandre Carrança",
+            "[Alexandre Carrança](https://alexapropt.github.io/Portfolio/)",
             "**Eduardo Santos**",
             "Luís Evangelista",
             "Rosane Sampaio",
@@ -46,7 +46,7 @@ export const publications = [
         tags: ["admin", "conf"],
         authors: [
             "Iara Margolis",
-            "Alexandre Carrança",
+            "[Alexandre Carrança](https://alexapropt.github.io/Portfolio/)",
             "Nuno Sousa",
             "José Rocha",
             "**Eduardo Santos**",
@@ -79,7 +79,7 @@ export const publications = [
         website_name: "Springer Nature Link",
         tags: ["admin", "conf"],
         authors: [
-            "Alexandre Carrança",
+            "[Alexandre Carrança](https://alexapropt.github.io/Portfolio/)",
             "Nuno Sousa",
             "José Rocha",
             "**Eduardo Santos**",
